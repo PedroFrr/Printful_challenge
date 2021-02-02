@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/catBreedDetailImageView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_image_size"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/padding_half"
+        android:contentDescription="@string/content_description_cat_breed"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/catBreedName"
+        style="@style/CatBreedNameTextSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/catBreedDetailImageView"
+        tools:text="Yonki" />
+
+    <TextView
+        android:id="@+id/catBreedDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:justificationMode="inter_word"
+        app:layout_constraintTop_toBottomOf="@id/catBreedName"
+        tools:targetApi="o"
+        tools:text="@tools:sample/lorem/random" />
+
+    <TextView
+        android:id="@+id/weightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_standard"
+        android:text="@string/weight_metric"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/catBreedDescription" />
+
+    <TextView
+        android:id="@+id/catBreedAverageWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_half"
+        app:layout_constraintBottom_toBottomOf="@+id/weightText"
+        app:layout_constraintStart_toEndOf="@id/weightText"
+        tools:text="5 - 7" />
+
+    <TextView
+        android:id="@+id/originText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_standard"
+        android:text="@string/origin"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/weightText" />
+
+    <TextView
+        android:id="@+id/catBreedOriginCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_half"
+        app:layout_constraintBottom_toBottomOf="@+id/originText"
+        app:layout_constraintStart_toEndOf="@id/originText"
+        tools:text="United States"/>
+
+    <TextView
+        android:id="@+id/affectionLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_standard"
+        android:text="@string/affection_level"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/originText" />
+
+    <RatingBar
+        android:id="@+id/catBreedAffectionLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/ratingBarStyleSmall"
+        android:numStars="5"
+        android:stepSize="0.1"
+        android:isIndicator="true"
+        app:layout_constraintBottom_toBottomOf="@+id/affectionLevel"
+        app:layout_constraintStart_toEndOf="@id/affectionLevel" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

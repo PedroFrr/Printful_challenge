@@ -102,6 +102,9 @@ dependencies {
     //Leak canary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leakCanaryVersion"
 
+    //Paging library
+    implementation "androidx.paging:paging-runtime-ktx:$rootProject.pagingLibraryVersion"
+
 
     //Test dependencies
     testImplementation 'junit:junit:4.13.1'
