@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorWhiteCard">@color/cardview_light_background</color>
+
+    <color name="separatorBackground">#AAAAAA</color>
+    <color name="separatorText">#FFFFFF</color>
+    <color name="colorAccent">#140078</color>
 </resources>

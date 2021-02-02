@@ -2,7 +2,7 @@ package com.example.printfulchallenge.di
 
 import android.content.Context
 import com.example.printfulchallenge.database.AppDatabase
-import com.example.printfulchallenge.database.dao.CatDao
+import com.example.printfulchallenge.database.dao.CatBreedDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,5 +19,6 @@ class DatabaseModel {
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase = AppDatabase.getInstance(context)
 
     @Provides
-    fun provideCatDao(appDatabase: AppDatabase): CatDao = appDatabase.catDao()
+    fun provideCatDao(appDatabase: AppDatabase): CatBreedDao = appDatabase.catBreedDao()
+
 }

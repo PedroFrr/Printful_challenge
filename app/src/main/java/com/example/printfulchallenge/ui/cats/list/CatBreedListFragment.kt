@@ -1,23 +1,18 @@
 package com.example.printfulchallenge.ui.cats.list
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
-import android.view.inputmethod.EditorInfo
-import androidx.core.widget.doOnTextChanged
+import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.printfulchallenge.R
-import com.example.printfulchallenge.database.model.Failure
-import com.example.printfulchallenge.database.model.Loading
-import com.example.printfulchallenge.database.model.Success
 import com.example.printfulchallenge.databinding.FragmentCatBreedListBinding
 import com.example.printfulchallenge.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -30,60 +25,65 @@ class CatBreedListFragment : Fragment(R.layout.fragment_cat_breed_list) {
     private val binding by viewBinding(FragmentCatBreedListBinding::bind)
     private val catBreedListAdapter by lazy { CatBreedListAdapter() }
     private val catBreedListViewModel by viewModels<CatBreedListViewModel>()
-    private var searchJob: Job? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initUi()
-        initObservables()
-
-        val query = savedInstanceState?.getString(LAST_SEARCH_QUERY) ?: DEFAULT_QUERY
-        search(query)
-        initSearch(query)
-//        binding.retryButton.setOnClickListener { adapter.retry() }
+        fetchCatBreeds()
+        initSearch()
     }
 
-    private fun initUi(){
+    private fun initUi() {
 
+        binding.retryButton.setOnClickListener { catBreedListAdapter.retry() }
+
+        initAdapter()
+
+    }
+
+    private fun initAdapter() {
         binding.catBreedsRecyclerView.apply {
-            adapter = catBreedListAdapter
+            adapter = catBreedListAdapter.withLoadStateHeaderAndFooter(
+                header = CatBreedsLoadStateAdapter { catBreedListAdapter.retry() },
+                footer = CatBreedsLoadStateAdapter { catBreedListAdapter.retry() }
+            )
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             hasFixedSize()
+
         }
 
-
-    }
-
-    private fun initObservables(){
-//        //TODO change once search is implemented
-//        lifecycleScope.launch {
-//            catBreedListViewModel.fetchCatBreeds().observe(viewLifecycleOwner, { result ->
-//                when(result){
-//                    //TODO handle Failure and Loading
-//                    is Success -> catBreedListAdapter.submitList(result.data)
-//                    is Failure -> null
-//                    Loading -> null
-//                }
-//
-//            })
-//        }
-
-    }
-
-    private fun initSearch(query: String) {
-
-        /*KTX Core addTextChangedListener
-        * Once search changes (and after debounce period) display new data
+        /*
+        Listener for changes on Paging Status - Loading, error, success
+        Updates the Fragment according to the status (should show retry button, cat breed list or loading progress bar)
          */
+        catBreedListAdapter.addLoadStateListener { loadState ->
+            // Only show the list if refresh succeeds.
+            binding.catBreedsRecyclerView.isVisible =
+                loadState.source.refresh is LoadState.NotLoading
+            // Show loading spinner during initial load or refresh.
+            binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+            // Show the retry state if initial load or refresh fails.
+            binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
 
-        //TODO refactor as we're setting the text manually it might not trigger the function call
-        binding.searchEditText.doOnTextChanged { _, _, _, _ ->
-            updateRepoListFromInput()
+            // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
+            val errorState = loadState.source.append as? LoadState.Error
+                ?: loadState.source.prepend as? LoadState.Error
+                ?: loadState.append as? LoadState.Error
+                ?: loadState.prepend as? LoadState.Error
+            errorState?.let {
+                Toast.makeText(
+                    requireContext(),
+                    "\uD83D\uDE28 Wooops ${it.error}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
 
-        binding.searchEditText.setText(query)
+
+    }
+
+    private fun initSearch() {
 
         // Scroll to top when the list is refreshed from network.
         lifecycleScope.launch {
@@ -96,28 +96,14 @@ class CatBreedListFragment : Fragment(R.layout.fragment_cat_breed_list) {
         }
     }
 
-    private fun updateRepoListFromInput() {
-        binding.searchEditText.text.trim().let {
-            if (it.isNotEmpty()) {
-                search(it.toString())
-            }
-        }
-    }
 
-    private fun search(query: String) {
-        searchJob?.cancel()
-        searchJob = lifecycleScope.launch {
-            catBreedListViewModel.fetchCatBreeds(query).collectLatest {
+    private fun fetchCatBreeds() {
+        lifecycleScope.launch {
+            catBreedListViewModel.fetchCatBreeds().collectLatest {
                 catBreedListAdapter.submitData(it)
             }
         }
     }
-
-    companion object {
-        private const val LAST_SEARCH_QUERY: String = "last_search_query"
-        private const val DEFAULT_QUERY = ""
-    }
-
 
 
 }

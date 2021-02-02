@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.printfulchallenge.database.dao.CatDao
+import com.example.printfulchallenge.database.dao.CatBreedDao
 import com.example.printfulchallenge.database.model.DbCatBreed
 import com.example.printfulchallenge.utils.DATABASE_NAME
 
@@ -14,7 +14,7 @@ import com.example.printfulchallenge.utils.DATABASE_NAME
  */
 @Database(entities = [DbCatBreed::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun catDao(): CatDao
+    abstract fun catBreedDao(): CatBreedDao
 
     companion object {
 

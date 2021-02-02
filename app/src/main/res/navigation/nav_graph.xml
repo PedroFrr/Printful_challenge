@@ -3,20 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/catListFragment">
+    app:startDestination="@id/catBreedListFragment">
 
     <fragment
-        android:id="@+id/catListFragment"
+        android:id="@+id/catBreedListFragment"
         android:name="com.example.printfulchallenge.ui.cats.list.CatBreedListFragment"
         android:label="fragment_cat_list"
         tools:layout="@layout/fragment_cat_breed_list" >
         <action
-            android:id="@+id/action_catListFragment_to_catDetailFragment"
+            android:id="@+id/catBreedListToDetail"
             app:destination="@id/catDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/catDetailFragment"
-        android:name="com.example.printfulchallenge.ui.cats.detail.CatDetailFragment"
+        android:name="com.example.printfulchallenge.ui.cats.detail.CatBreedDetailFragment"
         android:label="fragment_cat_detail"
-        tools:layout="@layout/fragment_cat_detail" />
+        tools:layout="@layout/fragment_cat_breed_detail" >
+        <argument
+            android:name="catBreedId"
+            app:argType="string" />
+    </fragment>
 </navigation>

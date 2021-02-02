@@ -14,6 +14,6 @@ interface CatApiService {
     suspend fun fetchCatBreeds(
         @Query("page") page: Int? = null,
         @Query("limit") itemsPerPage: Int = CAT_BREEDS_PAGE_SIZE, //default number of items to retrieve per page
-        @Query("order") order: String = "desc" //Default order for displaying breeds (can be ASC or DESC)
+        @Query("order") order: String = "asc" //Default order for displaying breeds (can be ASC or DESC)
     ): List<CatBreedResponse>
 }
