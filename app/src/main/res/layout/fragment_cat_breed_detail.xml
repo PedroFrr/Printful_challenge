@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/catBreedDetailImageView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/card_image_size"
+        android:layout_height="@dimen/detail_image_size"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/padding_half"
         android:contentDescription="@string/content_description_cat_breed"

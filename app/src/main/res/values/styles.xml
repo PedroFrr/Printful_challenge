@@ -13,8 +13,6 @@
     <!-- Splash Screen Theme -->
     <style name="SplashTheme">
         <item name="android:windowBackground">@drawable/splash_background</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
     <style name="CatBreedNameTextSize">

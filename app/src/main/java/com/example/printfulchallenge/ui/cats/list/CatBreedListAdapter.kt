@@ -15,6 +15,11 @@ import com.example.printfulchallenge.networking.response.CatBreedResponse
 import com.example.printfulchallenge.utils.CAT_IMAGES_BASE_URL
 import com.example.printfulchallenge.utils.loadImage
 
+/**
+ * Paginated Adapter for cat breed list
+ * Returns data from the API in a paginated way to avoid making unnecessary calls
+ * The [CatBreedUiModel] is used so the PaginatedAdapter accepts both headers and items.
+ */
 class CatBreedListAdapter :
     PagingDataAdapter<CatBreedUiModel, RecyclerView.ViewHolder>(CatBreedUiModelListDiffCallBack()) {
 

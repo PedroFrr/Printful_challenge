@@ -4,6 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
+
+/**
+ *  Room cat breed table, where the repo [id] is the primary key.
+ */
 @Entity(tableName = "catBreed")
 data class DbCatBreed(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),

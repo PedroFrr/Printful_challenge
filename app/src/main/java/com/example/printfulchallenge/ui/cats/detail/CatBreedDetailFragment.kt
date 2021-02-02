@@ -12,7 +12,7 @@ import com.example.printfulchallenge.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
- * A simple [Fragment] subclass.
+ * A simple [Fragment] subclass to display the info about a cat breed.
  */
 
 @AndroidEntryPoint
@@ -29,6 +29,11 @@ class CatBreedDetailFragment : Fragment(R.layout.fragment_cat_breed_detail) {
     }
 
     private fun initUi(){
+        /*
+         Argument passed with Jetpack navigation
+         Once we retrieve the catBreedId a call is made to the Database to retrieve its info
+         */
+
         arguments?.let {
             val args = CatBreedDetailFragmentArgs.fromBundle(it)
             val catBreedId = args.catBreedId

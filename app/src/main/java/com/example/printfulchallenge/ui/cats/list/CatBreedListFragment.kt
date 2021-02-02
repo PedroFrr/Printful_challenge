@@ -19,6 +19,10 @@ import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
+/**
+ * [Fragment] class to represent cat breed list.
+ * ViewBinding is done using an extension available online. Allows for view binding with one single line
+ */
 @AndroidEntryPoint
 class CatBreedListFragment : Fragment(R.layout.fragment_cat_breed_list) {
 
@@ -74,7 +78,7 @@ class CatBreedListFragment : Fragment(R.layout.fragment_cat_breed_list) {
             errorState?.let {
                 Toast.makeText(
                     requireContext(),
-                    "\uD83D\uDE28 Wooops ${it.error}",
+                    "\uD83D\uDE28 Error: ${it.error}",
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -88,8 +92,6 @@ class CatBreedListFragment : Fragment(R.layout.fragment_cat_breed_list) {
         // Scroll to top when the list is refreshed from network.
         lifecycleScope.launch {
             catBreedListAdapter.loadStateFlow
-                // Only emit when REFRESH LoadState for RemoteMediator changes.
-                .distinctUntilChangedBy { it.refresh }
                 // Only react to cases where Remote REFRESH completes i.e., NotLoading.
                 .filter { it.refresh is LoadState.NotLoading }
                 .collect { binding.catBreedsRecyclerView.scrollToPosition(0) }

@@ -9,6 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.printfulchallenge.R
 import com.example.printfulchallenge.databinding.CatBreedsLoadStateFooterViewItemBinding
 
+/**
+ * Loading State Adapter made available by Paging 3.0
+ * Displays a progress bar or a retry button while the data from the network is being fetched or an error has occurred respectively
+ */
 class CatBreedsLoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<CatBreedsLoadStateAdapter.CatBreedsLoadStateViewHolder>() {
     override fun onBindViewHolder(holder: CatBreedsLoadStateViewHolder, loadState: LoadState) {
         holder.bind(loadState)
