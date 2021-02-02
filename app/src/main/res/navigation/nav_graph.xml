@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/catListFragment"
-        android:name="com.example.printfulchallenge.ui.cats.list.CatListFragment"
+        android:name="com.example.printfulchallenge.ui.cats.list.CatBreedListFragment"
         android:label="fragment_cat_list"
-        tools:layout="@layout/fragment_cat_list" >
+        tools:layout="@layout/fragment_cat_breed_list" >
         <action
             android:id="@+id/action_catListFragment_to_catDetailFragment"
             app:destination="@id/catDetailFragment" />

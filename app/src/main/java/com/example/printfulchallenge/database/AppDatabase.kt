@@ -6,13 +6,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.printfulchallenge.database.dao.CatDao
-import com.example.printfulchallenge.database.model.DbCat
+import com.example.printfulchallenge.database.model.DbCatBreed
 import com.example.printfulchallenge.utils.DATABASE_NAME
 
 /**
  * SQLite Database for storing the CatAPI results
  */
-@Database(entities = [DbCat::class], version = 1, exportSchema = false)
+@Database(entities = [DbCatBreed::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun catDao(): CatDao
 
