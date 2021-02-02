@@ -9,4 +9,9 @@ data class DbCatBreed(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val name: String,
     val referenceImageId: String,
+    val weight: String,
+    val originCountry: String,
+    val description: String,
+    val affectionLevel: Int
+
 )

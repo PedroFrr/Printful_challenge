@@ -1,6 +1,5 @@
 package com.example.printfulchallenge.di
 
-import com.example.printfulchallenge.networking.CatApiClient
 import com.example.printfulchallenge.networking.CatApiService
 import com.example.printfulchallenge.utils.BASE_URL
 import com.example.printfulchallenge.utils.HEADER_AUTHORIZATION
@@ -62,8 +61,4 @@ object NetworkingModule {
     fun provideCatApiService(retrofit: Retrofit): CatApiService =
         retrofit.create(CatApiService::class.java)
 
-    @Provides
-    @Singleton
-    fun provideCatApiClient(catApiService: CatApiService): CatApiClient =
-        CatApiClient(catApiService)
 }

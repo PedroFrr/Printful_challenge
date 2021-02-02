@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.printfulchallenge.R
 import com.example.printfulchallenge.databinding.FragmentCatBreedDetailBinding
+import com.example.printfulchallenge.utils.CAT_IMAGES_BASE_URL
+import com.example.printfulchallenge.utils.loadImage
 import com.example.printfulchallenge.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,7 +40,12 @@ class CatBreedDetailFragment : Fragment(R.layout.fragment_cat_breed_detail) {
     private fun initObservables(){
         catBreedDetailViewModel.getCatBreedDetails().observe(viewLifecycleOwner, { catBreedDetail ->
             binding.apply {
-                breedName.text = catBreedDetail.name
+                catBreedName.text = catBreedDetail.name
+                catBreedDetailImageView.loadImage(catBreedDetail.referenceImageId.let{"$CAT_IMAGES_BASE_URL$it.jpg"}, R.drawable.ic_baseline_adb_24)
+                catBreedDescription.text = catBreedDetail.description
+                catBreedAverageWeight.text = catBreedDetail.weight
+                catBreedOriginCountry.text = catBreedDetail.originCountry
+                catBreedAffectionLevel.rating = catBreedDetail.affectionLevel.toFloat()
             }
         })
     }

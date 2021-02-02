@@ -10,7 +10,11 @@ class ApiMapperImpl @Inject constructor() :ApiMapper {
         DbCatBreed(
             id = id,
             name = name,
-            referenceImageId = referenceImageId ?: ""
+            referenceImageId = referenceImageId ?: "",
+            weight = weight.metric,
+            originCountry = originCountry,
+            description = description,
+            affectionLevel = affectionLevel
         )
     }
 }

@@ -25,7 +25,7 @@
             android:layout_gravity="center"
             android:contentDescription="@string/content_description_cat_breed"
             android:scaleType="fitXY"
-            tools:srcCompat="@drawable/common_google_signin_btn_icon_light" />
+            tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
             android:id="@+id/nameHolder"
