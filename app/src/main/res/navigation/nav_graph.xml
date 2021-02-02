@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/catListFragment">
+
+    <fragment
+        android:id="@+id/catListFragment"
+        android:name="com.example.printfulchallenge.ui.cats.list.CatListFragment"
+        android:label="fragment_cat_list"
+        tools:layout="@layout/fragment_cat_list" >
+        <action
+            android:id="@+id/action_catListFragment_to_catDetailFragment"
+            app:destination="@id/catDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/catDetailFragment"
+        android:name="com.example.printfulchallenge.ui.cats.detail.CatDetailFragment"
+        android:label="fragment_cat_detail"
+        tools:layout="@layout/fragment_cat_detail" />
+</navigation>
