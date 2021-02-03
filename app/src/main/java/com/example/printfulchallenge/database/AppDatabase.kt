@@ -26,19 +26,8 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
-        //Adding callback to pre populate the database with the city list from JSON
-        //For a better solution this city list should be hosted in a remote server so I wouldn't have to do this
         private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
-                .addCallback(
-                    object : RoomDatabase.Callback() {
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-//                            val request = OneTimeWorkRequestBuilder<CitiesDatabaseWorker>().build()
-//                            WorkManager.getInstance(context).enqueue(request)
-                        }
-                    }
-                )
                 .build()
         }
     }
